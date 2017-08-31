@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   before_save :encrypt_password
+  before_validation :lower_case
+
+  def lower_case
+    self.username.downcase! unless username.nil?
+  end
 
   def encrypt_password
     if self.password.present?
