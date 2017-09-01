@@ -15,6 +15,12 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Белый список локалей, доступных приложению
+I18n.available_locales = [:en, :ru]
+
+# устанавливаем локаль по умолчанию на что-либо другое, чем :en
+I18n.default_locale = :ru
+
 module Askme
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
