@@ -37,6 +37,13 @@
 
 <div class="column-3-4">
   <div class="user-questions buffer-both">
+    <div class="question-context text-center">
+      <h2 class="title-medium question-text">
+        <%= @questions.count %>
+        <%= t('questions', :count => @questions.count) %>
+      </h2>
+    </div>
+
     <div class="question-list">
       <% @questions.each do |question| %>
           <%= render partial: 'questions/question', object: question %>
