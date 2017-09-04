@@ -3,8 +3,12 @@
     <%= @user.name %>
   </h1>
 
+  <div class="buffer-both">
+    <%= link_to 'Редактировать профиль', edit_user_path(@user) %>
+  </div>
+
   <div class="user-img-div">
-    <%= image_tag user_avatar(@user), alt: '[Аватар]' %>
+    <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Аватар]' %>
   </div>
 
   <h2 class="title-small buffer-both">
