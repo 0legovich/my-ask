@@ -39,7 +39,7 @@ module Askme
     config.active_record.raise_in_transactional_callbacks = true
 
     config.time_zone = 'Moscow'
-    
+
     config.i18n.locale = :ru
 
     config.i18n.fallbacks = [:en]
