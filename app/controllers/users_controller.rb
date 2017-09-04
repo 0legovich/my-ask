@@ -42,12 +42,12 @@ class UsersController < ApplicationController
 
   private
 
-  def autorize_user
-    reject_user unless @user == current_user
-  end
-
   def load_user
     @user = User.find(params[:id])
+  end
+
+  def autorize_user
+    reject_user unless @user == current_user
   end
 
   def user_params

@@ -35,6 +35,11 @@
   float: left;
 }
 
+.column-3-4 {
+  float: left;
+  width: 75%;
+}
+
 .column-1-4-right {
   float: right;
 }
