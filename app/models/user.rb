@@ -10,12 +10,18 @@ class User < ActiveRecord::Base
   validates :email, :username, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true, on: :create
   validates :email, format: { with: /\A[a-zA-Z0-9_.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+\z/ }
+  validates :color, format: { with: /\A[\da-fA-Z]{6}\z/ }
   validates :username, length: { maximum: 40 }, format: { with: /\A[a-zA-z0-9_]+\z/ }
 
   attr_accessor :password
 
   before_save :encrypt_password
   before_validation :lower_case
+  before_validation :default_color
+
+  def default_color
+    self.color = '005a55' if self.color.blank?
+  end
 
   def lower_case
     self.username.downcase! unless username.nil?

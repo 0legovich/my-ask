@@ -5,49 +5,54 @@
     <div class="form">
 
       <% if @user.errors.any? %>
-        <div class="form-errors">
-          <ul>
-            <% @user.errors.full_messages.each do |message| %>
-                <li class="form-erros-message"><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+          <div class="form-errors">
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                  <li class="form-erros-message"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
       <% end %>
 
       <%= form_for @user do |f| %>
 
-        <div class="form-field">
-          <%= f.label 'Никнейм', class: 'form-label' %>
-          <%= f.text_field :username, class: 'form-text-field' %>
-        </div>
+          <div class="form-field">
+            <%= f.label 'Никнейм', class: 'form-label' %>
+            <%= f.text_field :username, class: 'form-text-field' %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label 'Ваше имя', class: 'form-label' %>
-          <%= f.text_field :name, class: 'form-text-field' %>
-        </div>
+          <div class="form-field">
+            <%= f.label 'Ваше имя', class: 'form-label' %>
+            <%= f.text_field :name, class: 'form-text-field' %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label 'URL Вашей аватарки', class: 'form-label' %>
-          <%= f.text_field :avatar_url, class: 'form-text-field' %>
-        </div>
+          <div class="form-field">
+            <%= f.label 'URL Вашей аватарки', class: 'form-label' %>
+            <%= f.text_field :avatar_url, class: 'form-text-field' %>
+          </div>
 
-        <div class="buffer-top-large buffer-bottom">
-          Если не хотите менять пароль - оставьте поля пустыми!
-        </div>
+          <div class="form-field">
+            <%= f.label 'Цвет фона', class: 'form-label' %>
+            <%= f.color_field :color, value: @user.color, class: 'form-text-field' %>
+          </div>
 
-        <div class="form-field">
-          <%= f.label :password, class: 'form-label' %>
-          <%= f.password_field :password, class: 'form-text-field' %>
-        </div>
+          <div class="buffer-top-large buffer-bottom">
+            Если не хотите менять пароль - оставьте поля пустыми!
+          </div>
 
-        <div class="form-field">
-          <%= f.label :password_confirmation, 'Пароль еще раз', class: 'form-label' %>
-          <%= f.password_field :password_confirmation, class: 'form-text-field' %>
-        </div>
+          <div class="form-field">
+            <%= f.label :password, class: 'form-label' %>
+            <%= f.password_field :password, class: 'form-text-field' %>
+          </div>
 
-        <div class="form-field">
-          <%= f.submit 'Сохранить', class: 'button button-small button-dark' %>
-        </div>
+          <div class="form-field">
+            <%= f.label :password_confirmation, 'Пароль еще раз', class: 'form-label' %>
+            <%= f.password_field :password_confirmation, class: 'form-text-field' %>
+          </div>
+
+          <div class="form-field">
+            <%= f.submit 'Сохранить', class: 'button button-small button-dark' %>
+          </div>
       <% end %>
     </div>
   </div>
