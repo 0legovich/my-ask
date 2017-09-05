@@ -50,8 +50,14 @@
             <%= f.password_field :password_confirmation, class: 'form-text-field' %>
           </div>
 
-          <div class="form-field">
+          <div class="form-action">
             <%= f.submit 'Сохранить', class: 'button button-small button-dark' %>
+          </div>
+
+          <div class="form-action">
+            <%= link_to 'Удалить аккаунт', @user, method: 'delete',
+                        data: { confirm: "Вы уверены, что хотите удалить свой аккаунт?" },
+                        class: 'button button-small button-red' %>
           </div>
       <% end %>
     </div>
