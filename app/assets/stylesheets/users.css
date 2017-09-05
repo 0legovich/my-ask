@@ -12,7 +12,7 @@
   color: white;
 }
 
-.user-img-div {
+.user-image-div {
   width: 100px;
   height: 100px;
   margin: 0 auto;
@@ -21,7 +21,7 @@
   overflow: hidden;
 }
 
-.user-img-div-small {
+.user-image-div-small {
   width: 75px;
   height: 75px;
   border-width: 3px;
@@ -34,7 +34,7 @@
 
 .user-details {
   padding: 10px 0;
-  color: white;
+  background: white;
 }
 
 .user-statistics {
