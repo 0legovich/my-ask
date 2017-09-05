@@ -16,6 +16,8 @@ gem 'rails', '4.2.9'
 #Central point to collect locale data for use in Ruby on Rails.
 gem 'rails-i18n'
 
+gem 'rails_12factor'
+
 gem 'uglifier'
 
 # Use jquery as the JavaScript library

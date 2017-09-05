@@ -1,7 +1,3 @@
-.form {
-  width: 100%
-}
-
 .form-field {
   margin-bottom: 10px;
 }
@@ -34,7 +30,7 @@
   color: #dc554f;
 }
 
-.form-erros-message {
+.form-error-message {
   list-style: none;
   margin-bottom: 10px;
 }

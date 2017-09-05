@@ -1,4 +1,4 @@
-.question-list {
+.questions-list {
   padding: 10px 0;
 }
 
@@ -6,7 +6,7 @@
   background: white;
 }
 
-.question-context {
+.question-content {
   padding: 10px 15px;
 }
 
@@ -23,8 +23,7 @@
   color: #005a55;
 }
 
-.question-answer{
-
+.question-answer {
 }
 
 .question-date {
