@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   before_validation :default_color
 
   def default_color
-    self.color = '005a55' if self.color.blank?
+    self.color = '#005a55' if self.color.blank?
   end
 
   def lower_case
