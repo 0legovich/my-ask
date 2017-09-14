@@ -7,23 +7,35 @@ class Question < ActiveRecord::Base
   validates :text, :user, presence: true
   validates :text, length: {maximum: 255}
 
-  before_create :create_hashtag
+  after_commit :create_hashtag
 
   def create_hashtag
     #eсли хештеги присутстуют в вопросе то мы их создаем или если они уже созданы
     #то присваиваем этому вопросу id хештега (mamy-to-many)
-    unless self.contained_hashtags.empty?
-      unless Hashtag.where(text: contained_hashtags).empty?
+    question_hashtags = self.contained_hashtags
+    exist_hashtags = Hashtag.where(text: question_hashtags).to_a
+    unless question_hashtags.empty?
+      unless exist_hashtags.empty?
         #присваиваем этому вопросу хештеги contained_hashtag
+        add_hashtags_to_question(exist_hashtags)
       else
         #создаем хештеги contained_hashtags
-        contained_hashtags.each { |hashtag| Hashtag.create!(text: hashtag) }
+        new_hashtags = []
+        question_hashtags.each { |hashtag| new_hashtags << Hashtag.create!(text: hashtag) }
+
         #присваиваем этому вопросу хештеги contained_hashtags
+        add_hashtags_to_question(new_hashtags)
       end
     end
   end
 
   def contained_hashtags
     text.split.select {|elem| elem.include?('#')}
+  end
+
+  def add_hashtags_to_question(exist_hashtags)
+    exist_hashtags.each do |hashtag|
+      HashtagQuestion.create!(hashtag: hashtag, question: self)
+    end
   end
 end
