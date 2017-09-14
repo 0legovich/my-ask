@@ -1,8 +1,8 @@
 class CreateHashtagQuestions < ActiveRecord::Migration
   def change
     create_table :hashtag_questions do |t|
-      t.reference :hashtag
-      t.reference :question
+      t.references :hashtag
+      t.references :question
 
       t.timestamps null: false
     end
