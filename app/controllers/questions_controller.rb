@@ -10,7 +10,10 @@ class QuestionsController < ApplicationController
   # POST /questions
   def create
     @question = Question.new(question_params)
-    @question.author = current_user
+    if set_questions_hashtags
+      @question.hashtags_attributes = set_questions_hashtags.map { |hashtag| {text: hashtag, question: @question} }
+    end
+      @question.author = current_user
 
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан.'
@@ -31,6 +34,11 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   def destroy
     user = @question.user
+    @question.hashtags.each do |hashtag|
+      @question.hashtags_attributes = {:id => hashtag.id.to_s, '_destroy' => '1'}
+    end
+
+    @question.save
     @question.destroy
     redirect_to user_path(user), notice: 'Вопрос удален.'
   end
@@ -52,5 +60,9 @@ class QuestionsController < ApplicationController
     else
       params.require(:question).permit(:user_id, :text)
     end
+  end
+
+  def set_questions_hashtags
+    @question.text.scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase)
   end
 end
