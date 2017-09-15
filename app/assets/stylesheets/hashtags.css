@@ -1,4 +1,16 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+.hashtag-title-content {
+  padding: 15px;
+  background: white;
+}
+
+.hashtag-title {
+  text-decoration: underline;
+  display: inline;
+}
+
+.hashtag-small {
+  font-size: 14px;
+  line-height: 100%;
+  padding-bottom: 10px;
+  padding-right: 5px;
+}

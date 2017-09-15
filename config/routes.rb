@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :questions, except: [:show, :new, :index] do
     resources :hashtags, only: [:create, :destroy]
   end
+  resources :hashtags, only: :show
 
   get 'sign_up' => 'users#new'
   get 'log_in' => 'sessions#new'

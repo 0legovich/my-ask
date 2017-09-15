@@ -16,6 +16,12 @@
         </div>
     <% end %>
 
+    <% if question.hashtags %>
+        <div class="question-answer text-lead">
+          <%= render partial: 'hashtags/hashtag', collection: question.hashtags, as: :hashtag %>
+        </div>
+    <% end %>
+
     <% if question.author %>
         <span class="text-small">Автор: </span>
         <%= link_to "@#{question.author.username}", user_path(question.author) %>
