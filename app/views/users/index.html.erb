@@ -21,3 +21,10 @@
       </div>
   <% end %>
 </div>
+
+<div class="content-wrapper buffer-both">
+  <div class="buffer-both text-center">
+    <h1 class="title-medium">Все хештеги</h1>
+  </div>
+  <%= render partial: 'hashtags/hashtag', collection: @hashtags %>
+</div>
