@@ -9,9 +9,6 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    set_questions_hashtags
-    create_hashtags(@questions_hashtags)
-
     @question.author = current_user
 
     if @question.save
@@ -23,13 +20,6 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update(question_params)
-      set_questions_hashtags
-
-      new_hashtags = @questions_hashtags - @question.hashtags.map(&:text)
-      inactive_hashtags = @question.hashtags.where.not(text: @questions_hashtags)
-
-      create_hashtags(new_hashtags)
-      destroy_hashtags(inactive_hashtags)
 
       redirect_to user_path(@question.user), notice: 'Вопрос сохранен.'
     else
@@ -61,26 +51,5 @@ class QuestionsController < ApplicationController
     else
       params.require(:question).permit(:user_id, :text)
     end
-  end
-
-  def set_questions_hashtags
-    @questions_hashtags = @question.text.scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase)
-
-    unless @question.answer.blank?
-      @questions_hashtags += @question.answer.scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase)
-    end
-  end
-
-  def create_hashtags(hashtags)
-    return unless hashtags
-    @question.hashtags_attributes = hashtags.map {|hashtag| {text: hashtag, question: @question}}
-    @question.save
-  end
-
-  def destroy_hashtags(hashtags)
-    hashtags.each do |hashtag|
-      @question.hashtags_attributes = {:id => hashtag.id.to_s, '_destroy' => '1'}
-    end
-    @question.save
   end
 end
