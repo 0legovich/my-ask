@@ -6,5 +6,5 @@ class Hashtag < ActiveRecord::Base
 
   scope :used_now, -> {joins(
     'LEFT JOIN hashtag_questions ON hashtag_questions.hashtag_id = hashtags.id'
-  ).where.not(hashtag_questions: {id: nil})}
+  ).where.not(hashtag_questions: {id: nil}).uniq}
 end

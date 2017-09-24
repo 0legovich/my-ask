@@ -1,13 +1,13 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   belongs_to :author, class_name: 'User'
-  has_many :hashtag_questions
+  has_many :hashtag_questions, dependent: :destroy
   has_many :hashtags, through: :hashtag_questions
 
   validates :text, :user, presence: true
   validates :text, length: {maximum: 255}
 
-  after_commit :update_question_hashtags
+  after_commit :update_question_hashtags, on: [:update, :create]
 
   def update_question_hashtags
     scanned_hashtags.each do |hsh|
@@ -23,5 +23,4 @@ class Question < ActiveRecord::Base
   def scanned_hashtags
     "#{text} #{answer}".scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase).uniq
   end
-
 end
