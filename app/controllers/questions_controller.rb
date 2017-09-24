@@ -29,7 +29,6 @@ class QuestionsController < ApplicationController
 
   def destroy
     user = @question.user
-    destroy_hashtags(@question.hashtags)
 
     @question.destroy
     redirect_to user_path(user), notice: 'Вопрос удален.'

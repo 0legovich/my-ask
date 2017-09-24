@@ -10,20 +10,18 @@ class Question < ActiveRecord::Base
   after_commit :update_question_hashtags
 
   def update_question_hashtags
-    question_hashtags = find_hashtags(text) + find_hashtags(answer)
-
-    question_hashtags.each do |hsh|
+    scanned_hashtags.each do |hsh|
       new_nashtag = Hashtag.find_or_create_by(text: hsh)
       HashtagQuestion.find_or_create_by(question: self, hashtag: new_nashtag)
     end
-    self.hashtags.each {|hsh| hsh.destroy! unless question_hashtags.include?(hsh.text)}
-  end
 
-  def find_hashtags(sentence)
-    unless sentence.blank?
-      sentence.scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase)
-    else
-      []
+    self.hashtag_questions.each do |hsh|
+      hsh.destroy! unless scanned_hashtags.include?(hsh.hashtag.text)
     end
   end
+
+  def scanned_hashtags
+    "#{text} #{answer}".scan(/\#[а-яА-Яa-zA-z\d-]+/).map(&:downcase).uniq
+  end
+
 end
