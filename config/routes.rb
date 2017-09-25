@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'users#index'
 
   resources :users
-  resource :sessions, only: [:new, :create, :destroy]
+  resource :session, only: [:new, :create, :destroy]
   resources :questions, except: [:show, :new, :index] do
     resources :hashtags, only: [:create, :destroy]
   end
