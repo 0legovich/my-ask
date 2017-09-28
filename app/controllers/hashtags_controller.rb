@@ -2,7 +2,7 @@ class HashtagsController < ApplicationController
   def show
     @hashtag = Hashtag.find(params[:id])
 
-    @questions = Question.joins(:hashtags).where(hashtags: {text: @hashtag.text})
+    @questions = @hashtag.questions
   end
 
 end
