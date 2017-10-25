@@ -4,5 +4,5 @@ class Hashtag < ActiveRecord::Base
 
   validates :text, presence: true
 
-  scope :used_now, -> {joins(:hashtag_questions).distinct("hashtag.id")}
+  scope :used_now, -> { joins(:hashtag_questions).distinct("hashtag.id") }
 end

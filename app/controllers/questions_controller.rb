@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: [:show, :edit, :update, :destroy]
-
   before_action :autorize_user, except: [:create]
 
   def edit
@@ -35,6 +34,7 @@ class QuestionsController < ApplicationController
   end
 
   private
+
   def check_captcha(model)
     if current_user.present?
       true

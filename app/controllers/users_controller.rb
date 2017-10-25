@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :load_user, except: [:index, :new, :create]
-
   before_action :autorize_user, except: [:index, :new, :create, :show]
 
   def index
